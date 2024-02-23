@@ -16,10 +16,20 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+# class PostSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Post
+#         fields = ['url' ,'title', 'content', 'categories']
+        
 class PostSerializer(serializers.HyperlinkedModelSerializer):
+    categories = serializers.SerializerMethodField()
+    
     class Meta:
         model = Post
-        fields = ['url' ,'title', 'content', 'categories']
+        fields = ['url', 'title', 'content', 'categories']
+
+    def get_categories(self, obj):
+        return [category.category for category in obj.categories.all()]
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
