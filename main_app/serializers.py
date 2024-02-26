@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from rest_framework import serializers
-from blog_app.models import Post, Category, Comment
+from blog_app.models import Post, Category, Comment, Photo
 from looks_app.models import Look, LooksCategory
 
 
@@ -16,20 +16,36 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-# class PostSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = Post
-#         fields = ['url' ,'title', 'content', 'categories']
+class PhotoSerializer(serializers.ModelSerializer):
+    # posts = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Photo
+        fields = ('id', 'url')
         
+
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     categories = serializers.SerializerMethodField()
+    photos = serializers.SerializerMethodField()
+    comments = serializers.SerializerMethodField()
     
     class Meta:
         model = Post
-        fields = ['url', 'title', 'content', 'categories']
+        fields = ['id', 'url', 'title', 'content', 'categories', 'photos', 'created_at', 'comments']
 
     def get_categories(self, obj):
         return [category.category for category in obj.categories.all()]
+    
+    def get_photos(self, obj):
+        photos_queryset = obj.photo_set.all() 
+        photos_data = PhotoSerializer(photos_queryset, many=True).data
+        return photos_data
+
+    def get_comments(self, obj):
+        request = self.context.get('request')
+        comments_queryset = obj.comment_set.all() 
+        comments_data = CommentSerializer(comments_queryset, many=True, context={'request': request}).data 
+        return comments_data
 
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
@@ -48,7 +64,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = fields = ['url', 'id', 'comment', 'post']
 
 
 class LookSerializer(serializers.HyperlinkedModelSerializer):

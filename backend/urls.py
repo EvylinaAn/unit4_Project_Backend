@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from rest_framework_simplejwt import views as jwt_views
 from main_app import views
+# from .views import add_photo
+
+from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -28,12 +30,22 @@ router.register(r'categories', views.CategoryViewSet)
 router.register(r'looks', views.LookViewSet)
 router.register(r'looksCategories', views.LooksCategoryViewSet)
 router.register(r'comments', views.CommentViewSet)
+# router.register(r'photos', views.PhotoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('token/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name ='token_refresh'),
-    path('home/', views.HomeView.as_view(), name ='home'),
     path('logout/', views.LogoutView.as_view(), name ='logout'),
+    # path('home/', views.HomeView.as_view(), name ='home'),
+    # path('add_photo/<int:post_id>/', views.add_photo, name='add_photo'),
+    # path('posts/<int:post_id>/add_photo/', add_photo , name='add_photo'),
     path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
+
+
+
+
+

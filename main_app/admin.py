@@ -1,8 +1,19 @@
 from django.contrib import admin
-from blog_app.models import Post, Category, Comment
+from blog_app.models import Post, Category, Comment, Photo
 from looks_app.models import Look, LooksCategory
 
 # from .models import Look
+
+class PhotoInline(admin.TabularInline):
+    model = Photo
+
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = ('post', 'url')  
+    fields = ('post', 'url') 
+
+
+class PostAdmin(admin.ModelAdmin):
+    inlines = [PhotoInline]
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category', 'display_posts')
@@ -24,8 +35,10 @@ class LooksCategoryAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
+admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Comment)
 admin.site.register(LooksCategory, LooksCategoryAdmin)
 admin.site.register(Look)
-# admin.site.register(Look)
+
+

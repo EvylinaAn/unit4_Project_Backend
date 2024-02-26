@@ -9,12 +9,15 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+# from django.conf import settings
+# from storages.backends.s3boto3 import S3Boto3Storage
 from pathlib import Path
 from datetime import timedelta
 
-import environ
 import os
+import environ
+
+environ.Env()
 
 env = environ.Env(
     DEBUG=(bool, True)
@@ -52,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tinymce',
     'corsheaders',
-    'rest_framework_simplejwt.token_blacklist'
+    # 'rest_framework_simplejwt.token_blacklist'
 ]
 
 MIDDLEWARE = [
@@ -66,9 +69,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-# ]
 CORS_ORIGIN_ALLOW_ALL=True
 CSRF_TRUSTED_ORIGINS=['http://localhost/']
 
@@ -160,3 +160,16 @@ SIMPLE_JWT = {
      'ROTATE_REFRESH_TOKENS': True,
      'BLACKLIST_AFTER_ROTATION': True
 }
+
+
+# S3_BASE_URL = 'https://s3.eu-north-1.amazonaws.com/'
+# S3_BUCKET = 'unit4project-blog'
+# class MediaStorage(S3Boto3Storage):
+#     location = 'media'
+#     file_overwrite = False
+
+# # Set media storage
+# DEFAULT_FILE_STORAGE = 'your_project_name.settings.MediaStorage'
+
+# # Set media URL
+# MEDIA_URL = f'https://{S3_BASE_URL}/{S3_BUCKET}/'
