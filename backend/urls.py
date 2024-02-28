@@ -30,18 +30,22 @@ router.register(r'categories', views.CategoryViewSet)
 router.register(r'looks', views.LookViewSet)
 router.register(r'looksCategories', views.LooksCategoryViewSet)
 router.register(r'comments', views.CommentViewSet)
-# router.register(r'photos', views.PhotoViewSet)
+router.register(r'photos', views.PhotoViewSet)
+router.register(r'featuredPhoto', views.FeaturedPhotoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('token/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name ='token_refresh'),
     path('logout/', views.LogoutView.as_view(), name ='logout'),
+    path('signup/', views.SignupView.as_view(), name='auth_register'),
     # path('home/', views.HomeView.as_view(), name ='home'),
     # path('add_photo/<int:post_id>/', views.add_photo, name='add_photo'),
     # path('posts/<int:post_id>/add_photo/', add_photo , name='add_photo'),
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/current_user/', views.current_user, name='current_user'),
+    # path('api/create_comment/', views.create_comment, name='create_comment')
 ]
 
 
