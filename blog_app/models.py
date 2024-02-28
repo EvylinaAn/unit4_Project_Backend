@@ -48,7 +48,7 @@ class FeaturedPhoto(models.Model):
         return f"Photo url: {self.url}"
     
     class Meta:
-        verbose_name_plural = 'photos'
+        verbose_name_plural = 'featuredPhotos'
 
 
 

@@ -31,12 +31,12 @@ class FeaturedPhotoSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     categories = serializers.SerializerMethodField()
     photos = serializers.SerializerMethodField()
-    featuredPhotos = serializers.SerializerMethodField()
+    # featuredPhotos = serializers.SerializerMethodField()
     comments = serializers.SerializerMethodField()
     
     class Meta:
         model = Post
-        fields = ['id', 'url', 'title', 'content', 'categories', 'photos', 'created_at', 'comments', 'featuredPhotos']
+        fields = ['id', 'url', 'title', 'content', 'categories', 'photos', 'created_at', 'comments']
 
     def get_categories(self, obj):
         return [category.category for category in obj.categories.all()]
@@ -46,10 +46,10 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         photos_data = PhotoSerializer(photos_queryset, many=True).data
         return photos_data
 
-    def get_featuredPhotos(self, obj):
-        featuredPhotos_queryset = obj.featuredphoto_set.all() 
-        featuredPhotos_data = FeaturedPhotoSerializer(featuredPhotos_queryset).data
-        return featuredPhotos_data
+    # def get_featuredPhotos(self, obj):
+    #     featuredPhotos_queryset = obj.featuredphoto.all() 
+    #     featuredPhotos_data = FeaturedPhotoSerializer(featuredPhotos_queryset).data
+    #     return featuredPhotos_data
 
     def get_comments(self, obj):
         request = self.context.get('request')

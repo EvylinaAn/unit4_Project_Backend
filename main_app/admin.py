@@ -20,7 +20,7 @@ class FeaturedPhotoAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    inlines = [PhotoInline]
+    inlines = [PhotoInline, FeaturedPhotoInline]
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category', 'display_posts')
