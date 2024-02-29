@@ -37,7 +37,11 @@ SECRET_KEY = 'django-insecure-izcx$is!x0#)ecc-jxgthzor)169bt0j-6!ivv@6qix3tqbn77
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = [
+    'localhost',
+    'spectacular-vein-production.up.railway.app',
+    'spectacular-vein.railway.internal'
+    ]
 
 
 # Application definition
