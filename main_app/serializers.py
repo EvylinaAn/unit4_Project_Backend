@@ -31,9 +31,8 @@ class FeaturedPhotoSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     categories = serializers.SerializerMethodField()
     photos = serializers.SerializerMethodField()
-    # featuredPhotos = serializers.SerializerMethodField()
     comments = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = Post
         fields = ['id', 'url', 'title', 'content', 'categories', 'photos', 'created_at', 'comments']
@@ -45,11 +44,6 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         photos_queryset = obj.photo_set.all() 
         photos_data = PhotoSerializer(photos_queryset, many=True).data
         return photos_data
-
-    # def get_featuredPhotos(self, obj):
-    #     featuredPhotos_queryset = obj.featuredphoto.all() 
-    #     featuredPhotos_data = FeaturedPhotoSerializer(featuredPhotos_queryset).data
-    #     return featuredPhotos_data
 
     def get_comments(self, obj):
         request = self.context.get('request')
@@ -77,11 +71,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['url', 'id', 'comment', 'post', 'owner' ]
 
 
-class LookSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Look
-        fields = '__all__'
-
 
 class LooksCategorySerializer(serializers.HyperlinkedModelSerializer):
     looks = serializers.SerializerMethodField()
@@ -95,3 +84,10 @@ class LooksCategorySerializer(serializers.HyperlinkedModelSerializer):
         looks = Look.objects.filter(categories=obj)
         return LookSerializer(looks, many=True, context={'request': request}).data
 
+
+class LookSerializer(serializers.ModelSerializer):
+    # categories = LooksCategorySerializer()
+    
+    class Meta:
+        model = Look
+        fields = ['url', 'id', 'description', 'categories']

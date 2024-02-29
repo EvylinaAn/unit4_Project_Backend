@@ -53,7 +53,6 @@ class PostViewSet(viewsets.ModelViewSet):
     
 
 class PhotoViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
     parser_classes = [parsers.MultiPartParser, parsers.FormParser]
@@ -61,9 +60,8 @@ class PhotoViewSet(viewsets.ModelViewSet):
 
 
 class FeaturedPhotoViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
     queryset = FeaturedPhoto.objects.all()
-    serializer_class = PhotoSerializer
+    serializer_class = FeaturedPhotoSerializer
     parser_classes = [parsers.MultiPartParser, parsers.FormParser]
     http_method_names = ['get', 'post', 'patch', 'delete']
 
@@ -97,7 +95,9 @@ class CommentViewSet(viewsets.ModelViewSet):
 class LookViewSet(viewsets.ModelViewSet):
     queryset = Look.objects.all()
     serializer_class = LookSerializer
-
+    parser_classes = [parsers.MultiPartParser, parsers.FormParser]
+    http_method_names = ['get', 'post', 'patch', 'delete']
+    
 
 class LooksCategoryViewSet(viewsets.ModelViewSet):
     queryset = LooksCategory.objects.all()
