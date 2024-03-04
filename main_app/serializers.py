@@ -68,7 +68,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['url', 'id', 'comment', 'post', 'owner', 'created_at' ]
+        fields = ['url', 'id', 'comment', 'post', 'owner', 'username', 'created_at' ]
 
 
 

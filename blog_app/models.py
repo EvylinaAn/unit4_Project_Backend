@@ -61,6 +61,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(max_length=250 )
 
     def __str__(self):
         return self.comment
