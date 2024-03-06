@@ -85,7 +85,8 @@ CSRF_TRUSTED_ORIGINS=[
     'http://unit4projectfrontend-production-1386.up.railway.app',
     'http://unit4_project_frontend.railway.internal',
     'https://blogthatfashiontale.netlify.app',
-    'thatfashiontale.up.railway.app'
+    'thatfashiontale.up.railway.app',
+    'https://blogthatfashiontale.netlify.app'
     ]
 
 TEMPLATES = [
