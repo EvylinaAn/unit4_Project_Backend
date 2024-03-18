@@ -39,6 +39,7 @@ class Photo(models.Model):
     
     class Meta:
         verbose_name_plural = 'photos'
+        
 
 class FeaturedPhoto(models.Model):
     url = models.ImageField( max_length=254)
@@ -49,7 +50,6 @@ class FeaturedPhoto(models.Model):
     
     class Meta:
         verbose_name_plural = 'featuredPhotos'
-
 
 
 class Comment(models.Model):

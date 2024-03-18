@@ -15,7 +15,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view
 import uuid
 import os
-# import boto3
 
 from .serializers import *
 
