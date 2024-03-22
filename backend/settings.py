@@ -84,7 +84,8 @@ ROOT_URLCONF = 'backend.urls'
 CSRF_TRUSTED_ORIGINS=[
     'http://localhost/',
     "https://spectacular-vein-production.up.railway.app",
-    'https://blogthatfashiontale.netlify.app'
+    'https://blogthatfashiontale.netlify.app',
+    "https://thatfashiontaleblog.netlify.app/looks"
     # 'https://blogthatfashiontale.netlify.app/'
     ]
 
