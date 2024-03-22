@@ -40,7 +40,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     'spectacular-vein-production.up.railway.app',
-    'spectacular-vein.railway.internal'
+    'spectacular-vein.railway.internal',
+    "blogthatfashiontale.netlify.app"
     ]
 
 
